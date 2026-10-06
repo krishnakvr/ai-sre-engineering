@@ -1,0 +1,1097 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Independent engineering and research into AI-assisted Site Reliability Engineering">
+      
+      
+      
+        <link rel="canonical" href="https://krishnakvr.github.io/ai-sre-engineering/ai-sre/01-alert-to-fix-ready-for-approval/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>AI-SRE: From Alert to a Fix Ready for Approval in 17 Seconds - AI-SRE Engineering</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ai-sre-from-alert-to-a-fix-ready-for-approval-in-17-seconds" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI-SRE Engineering" class="md-header__button md-logo" aria-label="AI-SRE Engineering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI-SRE Engineering
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AI-SRE: From Alert to a Fix Ready for Approval in 17 Seconds
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/krishnakvr/ai-sre-engineering" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ai-sre-engineering
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI-SRE Engineering" class="md-nav__button md-logo" aria-label="AI-SRE Engineering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI-SRE Engineering
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/krishnakvr/ai-sre-engineering" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ai-sre-engineering
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI-SRE and AI engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI-SRE and AI engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI-SRE: From Alert to a Fix Ready for Approval in 17 Seconds
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI-SRE: From Alert to a Fix Ready for Approval in 17 Seconds
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-incident-in-brief" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The incident in brief
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-is-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it is for
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-constraints-that-shaped-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The constraints that shaped it
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-run-second-by-second" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One run, second by second
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-went-wrong-along-the-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What went wrong along the way
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-does-not-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What this does not show
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-would-have-to-change-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What would have to change at scale
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-incident-in-brief" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The incident in brief
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-is-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it is for
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-constraints-that-shaped-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The constraints that shaped it
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-run-second-by-second" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One run, second by second
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-went-wrong-along-the-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What went wrong along the way
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-does-not-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What this does not show
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-would-have-to-change-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What would have to change at scale
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="ai-sre-from-alert-to-a-fix-ready-for-approval-in-17-seconds">AI-SRE: From Alert to a Fix Ready for Approval in 17 Seconds<a class="headerlink" href="#ai-sre-from-alert-to-a-fix-ready-for-approval-in-17-seconds" title="Permanent link">&para;</a></h1>
+<h2 id="the-incident-in-brief">The incident in brief<a class="headerlink" href="#the-incident-in-brief" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Someone pushes a config change to the GitOps repository. It looks harmless ("payments: tune runtime
+    config"), but it makes half the requests fail and adds 600 ms to the rest.</li>
+<li>About eight minutes later the SLO fast-burn alert fires for <code>go-orders</code>.</li>
+<li>Seventeen seconds after the alert arrives, a pull request that reverts the commit is open in Gitea.<ul>
+<li>Its description names the commit, says why, and links to a trace of every step.</li>
+<li>The same finding is in Slack and on the OneUptime incident.</li>
+<li>Nothing in the cluster has changed yet.</li>
+</ul>
+</li>
+<li>An SRE opens the pull request, reads a four-line diff and approves it.</li>
+<li>The revert is merged, ArgoCD rolls it out, and the workflow watches the error rate until the service
+    is healthy again.</li>
+</ul>
+<p>The rest of this piece covers how that works, what went wrong on the way, and how far the result can
+be trusted.</p>
+<h2 id="what-it-is-for">What it is for<a class="headerlink" href="#what-it-is-for" title="Permanent link">&para;</a></h2>
+<ul>
+<li>In a bad-deploy incident the fix is usually a revert, and the revert takes a minute.</li>
+<li>The slow part comes before it: reading the alert, checking which service is really broken, listing
+    recent changes, reading diffs and deciding which change to blame.</li>
+<li>That part is mechanical enough to automate. The on-call engineer then starts with a proposed fix to
+    judge instead of a blank page.</li>
+</ul>
+<p>Two rules were fixed before anything was built:</p>
+<ul>
+<li>The automation must never change production on its own judgement.</li>
+<li>Paging has to work exactly as before, whether the automation runs, fails or is switched off.</li>
+</ul>
+<h2 id="the-constraints-that-shaped-it">The constraints that shaped it<a class="headerlink" href="#the-constraints-that-shaped-it" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>One small server.</strong> 4 cores, 32 GB of memory, no GPU, shared with the whole platform.</li>
+<li><strong>No hosted model API.</strong> That leaves room for a small model only: about 3 billion parameters on the
+    server, or 7 billion on a laptop GPU when the laptop is online.</li>
+<li><strong>Small models cannot run an investigation themselves.</strong><ul>
+<li>Given tools and asked to work out what was wrong, the chosen model made sensible tool calls and
+    then failed to give a usable answer. Two live attempts took 58 and 125 seconds.</li>
+<li>Asked one well-prepared question, the same model answered correctly in a few seconds.</li>
+<li>So the investigation is ordinary code and the model is called once. More in <em>AI-SRE: Why Not an
+    Autonomous Agent</em>.</li>
+</ul>
+</li>
+<li><strong>Everything is deployed through Git.</strong> All changes reach the cluster through Git and ArgoCD, so a
+    fix is a commit and a proposed fix can be a pull request.</li>
+</ul>
+<h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    C[Bad commit in orders-gitops] --&gt; A[SLO fast-burn alert]
+    A --&gt; AM[Alertmanager]
+    AM --&gt; P[OneUptime: incident and paging]
+    AM --&gt; S[Slack: firing message]
+    AM --&gt; R[Receiver]
+    R --&gt; J[Investigation Job]
+    J --&gt; E[Evidence from four read-only tools]
+    E --&gt; M[One model call]
+    M --&gt; G{Safe to propose?}
+    G --&gt;|yes| PR[Pull request from a fork]
+    G --&gt;|no| F[Finding only]
+    J --&gt; N[Note on the incident, message in Slack]
+    PR --&gt; H[Approver reviews and approves in Gitea]
+    H --&gt; W[Signed webhook]
+    W --&gt; X[Remediation Job]
+    X --&gt; EG{Allowed to merge?}
+    EG --&gt;|yes| MG[Merge by the executor account]
+    EG --&gt;|no| NC[Nothing changes; refusal is recorded]
+    MG --&gt; CD[ArgoCD rolls out]
+    CD --&gt; V[Recovery checked from telemetry]</code></pre>
+<p><strong>Step 1: the alert starts a Job</strong></p>
+<ul>
+<li>Alertmanager already sent this alert to OneUptime and Slack. A third route was added at the end of
+    the list, to a small receiver inside the cluster.</li>
+<li>The receiver does one thing: it starts a Kubernetes Job. It has no other credentials and makes no
+    decisions.</li>
+</ul>
+<p><strong>Step 2: code collects the evidence</strong></p>
+<ul>
+<li>Four read-only tools: which alerts are firing, the error rate and latency of each service, the
+    commits to the GitOps repository in the last hour, and the diff of each commit.</li>
+<li>This takes about a fifth of a second.</li>
+</ul>
+<p><strong>Step 3: the model answers one question</strong></p>
+<ul>
+<li>The evidence goes to the model in one request of roughly 540 tokens.</li>
+<li>The reply must have a fixed shape:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">"incident"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nt">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"go-orders"</span><span class="p">,</span><span class="w"> </span><span class="nt">"commit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"61bb7d3058"</span><span class="p">,</span><span class="w"> </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gitops-revert"</span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Step 4: code decides whether to propose a fix</strong></p>
+<p>From here on the model is out of the picture. A pull request is opened only if:</p>
+<ul>
+<li>the action is on the allowed list, which currently has one entry;</li>
+<li>the kill switch is on;</li>
+<li>OpenFGA permits the workflow to remediate this service;</li>
+<li>the files the commit touched have not been changed again since.</li>
+</ul>
+<p>The pull request is opened by <code>ai-sre-proposer</code>, an account with no rights on the repository. It works
+from its own fork, so it cannot push to <code>main</code> or merge anything.</p>
+<p><strong>Step 5: a person approves in Gitea</strong></p>
+<ul>
+<li>Approval happens in Gitea because that is where the diff is. A Slack button would be quicker to
+    click, but the approver would be approving a sentence instead of a change.</li>
+<li>The approval is a review, not a merge. If merging were the approval, anyone with merge rights could
+    change the cluster and the check would come too late.</li>
+</ul>
+<p><strong>Step 6: a second Job checks and merges</strong></p>
+<ul>
+<li>Gitea calls the receiver through a signed webhook, and a second Job starts.</li>
+<li>It does not trust what the webhook says. It reads the reviews back from Gitea and confirms the
+    approval is on the exact commit that would be merged.</li>
+<li>It asks OpenFGA whether this person may approve changes to this service.</li>
+<li>It writes the approval to the audit log. Only if that write succeeds does it merge, using a
+    different account, <code>ai-sre-executor</code>.</li>
+</ul>
+<p><strong>Step 7: recovery is verified</strong></p>
+<ul>
+<li>After the merge, the Job watches the error ratio and p95 latency.</li>
+<li>It reports recovery once four samples in a row are healthy and the alert has cleared.</li>
+</ul>
+<h2 id="one-run-second-by-second">One run, second by second<a class="headerlink" href="#one-run-second-by-second" title="Permanent link">&para;</a></h2>
+<p>Times are counted from the moment the alert reached the receiver.</p>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>What happened</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>−8 min 02 s</td>
+<td>The bad commit is pushed</td>
+</tr>
+<tr>
+<td>0 s</td>
+<td>The alert arrives and the investigation Job starts</td>
+</tr>
+<tr>
+<td>15 s</td>
+<td>Verdict: incident on <code>go-orders</code>, caused by that commit, revert it</td>
+</tr>
+<tr>
+<td>17 s</td>
+<td>Pull request #3 is open</td>
+</tr>
+<tr>
+<td>about 20 s</td>
+<td>The finding is in Slack</td>
+</tr>
+<tr>
+<td>about 28 s</td>
+<td>The finding is on the OneUptime incident</td>
+</tr>
+<tr>
+<td>51 s</td>
+<td><code>engineer1</code>, who is not an approver for this service, approves. Refused</td>
+</tr>
+<tr>
+<td>59 s</td>
+<td><code>sre-admin</code> approves</td>
+</tr>
+<tr>
+<td>61 s</td>
+<td>Merged by <code>ai-sre-executor</code></td>
+</tr>
+<tr>
+<td>4 min 39 s</td>
+<td>New pods are running</td>
+</tr>
+<tr>
+<td>8 min 04 s</td>
+<td>Recovery confirmed, alert cleared</td>
+</tr>
+</tbody>
+</table>
+<p>Where the first 15 seconds went:</p>
+<ul>
+<li>The evidence tools took 0.2 s.</li>
+<li>The model took 13 s. Nearly half of that (5.6 s) was loading it into memory, because it had been
+    idle.</li>
+<li>With the model already loaded, the whole investigation takes about 8 seconds.</li>
+</ul>
+<p>Why recovery took seven minutes after the merge:</p>
+<ul>
+<li>None of that time is the workflow.</li>
+<li>ArgoCD checks the repository every two minutes. With the rollout, the new pods were running after
+    about three and a half minutes.</li>
+<li>The rest is waiting: the error-rate window has to drain, four good samples have to arrive, and the
+    alert has to clear.</li>
+<li>A rollback done by hand on the same platform takes the same three to four minutes to go live.</li>
+</ul>
+<h2 id="what-went-wrong-along-the-way">What went wrong along the way<a class="headerlink" href="#what-went-wrong-along-the-way" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>The model blamed the wrong commit.</strong><ul>
+<li>When the same fault was injected twice within an hour, the model picked the revert that had fixed
+    the first incident. It was the newest change, and reverts look like changes.</li>
+<li>A rule in the prompt did not help. Labelling the revert in the evidence did not help either.</li>
+<li>What worked: if a commit and the revert that undid it are both in the window, neither is shown to
+    the model. More in <em>AI-SRE: Fix the Evidence, Not the Prompt</em>.</li>
+</ul>
+</li>
+<li><strong>The first alert-triggered run was too fast.</strong><ul>
+<li>It tried to attach its finding to the OneUptime incident seven seconds before OneUptime had
+    created the incident.</li>
+<li>Now Slack is sent straight away, and the note waits for the incident and records how long it
+    waited.</li>
+</ul>
+</li>
+<li><strong>The note landed on an old incident.</strong><ul>
+<li>OneUptime had not opened a new incident, because an older one for the same monitor was still open.
+    The note went to the previous drill's incident, which was already resolved.</li>
+<li>Runs started by an alert now write only to an open incident for the same service.</li>
+</ul>
+</li>
+<li><strong>A second investigation started for the same incident.</strong><ul>
+<li>During one recovery the alert also fired for <code>java-payments</code>, five minutes in. The answer was
+    reasonable (escalate, no commit to blame), but two findings for one incident is noise.</li>
+<li>The receiver now starts nothing new while a run is active or one started in the last 15 minutes.</li>
+</ul>
+</li>
+<li><strong>Approvals did nothing at first.</strong><ul>
+<li>The webhook had been registered with event names Gitea did not recognise. Gitea accepts those
+    without complaint and then never fires.</li>
+<li>The setup script now sends a test delivery and checks that it arrived.</li>
+</ul>
+</li>
+<li><strong>The test itself was wrong once.</strong><ul>
+<li>It reported that the pull request had been merged after the unauthorized approval. In fact the
+    authorized approver had clicked eight seconds later, and the test had only asked "is it merged
+    now?".</li>
+<li>It now compares the review and merge times that Gitea records. More in <em>Engineering Judgment: When
+    the Check Is Wrong, Not the System</em>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
+<p>The drill was run five times with the alert starting the investigation and nobody touching it.</p>
+<table>
+<thead>
+<tr>
+<th>Drill</th>
+<th>Alert fired after</th>
+<th>Investigation took</th>
+<th>Right commit</th>
+<th>What happened next</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>527 s</td>
+<td>8.8 s</td>
+<td>yes</td>
+<td>Pull request opened, then closed by the test</td>
+</tr>
+<tr>
+<td>2</td>
+<td>520 s</td>
+<td>8.0 s</td>
+<td>yes</td>
+<td>Pull request opened, then closed by the test</td>
+</tr>
+<tr>
+<td>3</td>
+<td>482 s</td>
+<td>13.2 s</td>
+<td>yes</td>
+<td>Approved and merged; recovered 423 s later</td>
+</tr>
+<tr>
+<td>4</td>
+<td>406 s</td>
+<td>12.9 s</td>
+<td>yes</td>
+<td>Kill switch off, so a finding but no pull request</td>
+</tr>
+<tr>
+<td>5</td>
+<td>570 s</td>
+<td>11.1 s</td>
+<td>yes</td>
+<td>Approved and merged; recovered 263 s later</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Drill 3 is the run in the timeline above.</li>
+<li>The end-to-end test around drill 5 passed all 19 of its checks.</li>
+<li>The kill-switch test around drill 4 passed all 10.</li>
+<li>After each merge, a separate recovery check that knows nothing about the workflow confirmed the
+    service was healthy.</li>
+</ul>
+<p>This is the audit log from drill 5, exactly as the workflow wrote it:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">"actor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai-sre"</span><span class="p">,</span><span class="w"> </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gitops-revert"</span><span class="p">,</span><span class="w"> </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders-gitops@2d4ad5ffae"</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"proposed: pull request #4"</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">"actor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user:engineer1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"review-remediation"</span><span class="p">,</span><span class="w"> </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders/orders-gitops#4"</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approval by engineer1 refused: not an approver of service:orders"</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">"actor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user:sre-admin"</span><span class="p">,</span><span class="w"> </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approve-remediation"</span><span class="p">,</span><span class="w"> </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders/orders-gitops#4"</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved gitops-revert of 2d4ad5ffae"</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">"actor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai-sre"</span><span class="p">,</span><span class="w"> </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gitops-revert"</span><span class="p">,</span><span class="w"> </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders-gitops@2d4ad5ffae"</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"executing: merging pull request #4"</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">"actor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ai-sre"</span><span class="p">,</span><span class="w"> </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verify-recovery"</span><span class="p">,</span><span class="w"> </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders-gitops@2d4ad5ffae"</span><span class="p">,</span><span class="w"> </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recovered; alerts cleared"</span><span class="p">}</span>
+</code></pre></div>
+<p>The pull request from drill 3 shows the whole exchange in one place: the proposal, the approval that
+was refused, the one that was accepted, and the merge.</p>
+<p><img alt="Pull request with the refused and the accepted approval" src="../../assets/images/alert-to-fix/pull-request.png" /></p>
+<p>The trace of that run in OpenLIT. The total is 26 seconds because the last step spent 10 of them
+waiting for the incident to exist.</p>
+<p><img alt="Trace of the investigation run" src="../../assets/images/alert-to-fix/trace.png" /></p>
+<p>What the on-call engineer saw in Slack, first the finding and later the result:</p>
+<p><img alt="Finding posted in Slack" src="../../assets/images/alert-to-fix/slack-finding.png" /></p>
+<p><img alt="Result posted in Slack after recovery" src="../../assets/images/alert-to-fix/slack-result.png" /></p>
+<p>And the same finding on the incident in OneUptime:</p>
+<p><img alt="Finding as a note on the incident" src="../../assets/images/alert-to-fix/incident-note.png" /></p>
+<h2 id="what-this-does-not-show">What this does not show<a class="headerlink" href="#what-this-does-not-show" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>One kind of fault.</strong> All five drills inject a bad configuration commit. No other failure has been
+    tested this way.</li>
+<li><strong>Five runs are not an accuracy figure.</strong> They show the path works end to end.</li>
+<li><strong>One alert, one action.</strong> Only one alert starts a run and only a revert can be proposed.</li>
+<li><strong>The 17 seconds is from a single run.</strong><ul>
+<li>Across the five, the investigation took 8 to 13 seconds, mostly depending on whether the model was
+    already in memory.</li>
+<li>If the laptop is asleep or off the network, the server's smaller model answers in 12 to 21 seconds.</li>
+</ul>
+</li>
+<li><strong>Detection is not improved.</strong> The alert fired seven to nine and a half minutes after the bad commit
+    in every drill, because a burn-rate alert needs a few minutes of errors before it is sure. That wait
+    is longer than everything described here.</li>
+<li><strong>The evidence is limited</strong> to alerts, service health and Git history. A fault that shows up only in
+    logs or traces, or one that no commit explains, is outside what the workflow can find.</li>
+<li><strong>Two controls are weaker than they should be.</strong><ul>
+<li>The receiver's alert endpoint has no authentication. It is reachable only from inside the cluster,
+    and the worst a caller can do is start a read-only investigation.</li>
+<li>OpenFGA accepts writes from anything inside the cluster. The check that really protects the merge
+    is the workflow's own lookup of whether the reviewer is an approver.</li>
+</ul>
+</li>
+<li><strong>Manual merges are not covered.</strong> Anyone with write access to the repository can still merge by
+    hand. Gitea records that; the workflow's audit log does not.</li>
+</ul>
+<h2 id="what-would-have-to-change-at-scale">What would have to change at scale<a class="headerlink" href="#what-would-have-to-change-at-scale" title="Permanent link">&para;</a></h2>
+<ul>
+<li>"One investigation per incident" is a time rule today. That is good enough for one service and too
+    crude for many. It would need to follow the incident itself.</li>
+<li>Every new action on the allowed list would need its own drill with a known answer before being
+    switched on, as the revert has.</li>
+<li>Approvers are assigned to a service one person at a time. That would have to become teams.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Introduction
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Text and images licensed under CC BY 4.0
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.footer", "navigation.top", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
