@@ -1,0 +1,8 @@
+# The sidebar is built from the files. To add a piece, add a .md file to one of the four folders;
+# pieces are listed in file-name order (01-..., 02-...), with the title taken from the first heading.
+nav:
+  - Introduction: index.md
+  - ai-sre
+  - sre
+  - platform
+  - engineering-judgment

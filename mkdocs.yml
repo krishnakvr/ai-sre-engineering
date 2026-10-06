@@ -1,0 +1,44 @@
+site_name: AI-SRE Engineering
+site_description: Independent engineering and research into AI-assisted Site Reliability Engineering
+site_url: https://krishnakvr.github.io/ai-sre-engineering/
+repo_url: https://github.com/krishnakvr/ai-sre-engineering
+repo_name: ai-sre-engineering
+copyright: Text and images licensed under CC BY 4.0
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.footer
+    - navigation.top
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+# Navigation is generated from the files under docs/ (see docs/.nav.yml).
+plugins:
+  - search
+  - awesome-nav
+
+markdown_extensions:
+  - tables
+  - attr_list
+  - toc:
+      permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
